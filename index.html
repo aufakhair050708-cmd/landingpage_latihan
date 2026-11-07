@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sobat Kopi – Kedai kopi dengan biji sangrai sendiri</title>
+<meta name="description" content="Kedai kopi lokal dengan biji Nusantara yang disangrai tiap pekan. Lihat menu, biji minggu ini, dan jam buka.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#edf1e8; --bg-2:#dde5d3; --ink:#2b1823; --ink-2:#5b4651;
+  --cherry:#c23a2e; --cherry-dark:#9f2b21; --leaf:#4f6b45; --white:#fbfcf8; --line:#c9d3bd;
+  --display:"Gabarito","Trebuchet MS",sans-serif; --body:"Karla","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--body);font-size:18px;line-height:1.6;color:var(--ink);background:var(--bg)}
+svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.015em}
+h2{font-size:clamp(2rem,4vw,3rem);font-weight:800}
+p{max-width:58ch}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+section{padding:96px 0}
+:focus-visible{outline:3px solid var(--cherry);outline-offset:3px}
+.btn{display:inline-block;font:700 1rem var(--body);text-decoration:none;padding:14px 26px;border-radius:99px;border:2px solid var(--ink);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.btn-fill{background:var(--cherry);border-color:var(--cherry);color:var(--white)}
+.btn-fill:hover{background:var(--cherry-dark);border-color:var(--cherry-dark)}
+.btn-out:hover{background:var(--ink);color:var(--white)}
+ 
+/* Navigasi */
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav{display:flex;justify-content:space-between;align-items:center;height:66px}
+.logo{font:800 1.45rem var(--display);text-decoration:none;display:flex;gap:9px;align-items:center}
+.logo i{width:16px;height:16px;border-radius:50%;background:var(--cherry);display:block}
+.menu{display:flex;gap:28px;list-style:none;align-items:center}
+.menu a{text-decoration:none;font-weight:500}
+.menu a:hover{color:var(--cherry)}
+.menu .btn{padding:8px 20px;color:var(--white);background:var(--ink)}
+.menu .btn:hover{background:var(--cherry);color:var(--white)}
+.burger{display:none;width:44px;height:44px;background:none;border:0;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px auto}
+ 
+/* Hero */
+.hero{padding:70px 0 90px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:50px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5.1rem);font-weight:800;max-width:12ch}
+.hero p{margin-top:22px;font-size:1.2rem;color:var(--ink-2)}
+.status{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:8px 16px 8px 12px;border-radius:99px;background:var(--white);border:1px solid var(--line);font-weight:500;font-size:.98rem}
+.dot{width:10px;height:10px;border-radius:50%;background:#9a9a9a}
+.status.open .dot{background:#2f9e4f;box-shadow:0 0 0 4px rgba(47,158,79,.2)}
+.status.closed .dot{background:var(--cherry)}
+.cta{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
+.cup{width:100%;max-width:440px;justify-self:center}
+.steam path{stroke:var(--ink-2);stroke-width:4;fill:none;stroke-linecap:round;opacity:.5;animation:steam 4s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:.8s}
+.steam path:nth-child(3){animation-delay:1.6s}
+@keyframes steam{0%,100%{transform:translateY(0);opacity:.15}50%{transform:translateY(-8px);opacity:.55}}
+ 
+/* Biji minggu ini */
+.beans{background:var(--ink);color:var(--white)}
+.beans .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.beans p{color:#e3d6dc;margin-top:18px}
+.spec{margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:6px 24px;font-size:1rem}
+.spec dt{color:#bfa9b3}
+.spec dd{font-weight:700}
+.meters{background:#3a2431;border-radius:16px;padding:32px;display:grid;gap:22px}
+.meters h3{font-size:1.3rem}
+.m{display:grid;grid-template-columns:90px 1fr 34px;gap:14px;align-items:center;font-size:1rem}
+.bar{height:10px;border-radius:99px;background:#563a49;overflow:hidden}
+.bar b{display:block;height:100%;background:#e4a79f;border-radius:99px}
+.note{font-size:.95rem;color:#d3c0c8}
+ 
+/* Menu */
+.menu-sec .top{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:34px}
+.tabs{display:flex;gap:8px;background:var(--bg-2);padding:5px;border-radius:99px}
+.tab{font:700 1rem var(--body);padding:9px 22px;border:0;background:none;border-radius:99px;cursor:pointer;color:var(--ink-2)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--white)}
+.panel{columns:2;column-gap:60px}
+.panel[hidden]{display:none}
+.item{break-inside:avoid;padding:14px 0}
+.item .l{display:flex;align-items:baseline;gap:10px}
+.item h3{font-size:1.2rem;font-weight:700}
+.item .l::after{content:"";order:1;flex:1;border-bottom:2px dotted #a9b59c;transform:translateY(-4px)}
+.item .l span{order:2;font-weight:700}
+.item p{font-size:.98rem;color:var(--ink-2);margin-top:2px}
+.tag{font-size:.82rem;font-weight:700;color:var(--cherry);margin-left:6px}
+.menu-note{margin-top:28px;color:var(--ink-2);font-size:.98rem}
+ 
+/* Cerita */
+.story{background:var(--bg-2)}
+.story .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.story p{margin-top:18px;color:var(--ink-2)}
+.story p:first-of-type{margin-top:22px}
+.facts{display:grid;gap:20px;align-content:start}
+.fact{background:var(--white);border-radius:14px;padding:22px 26px}
+.fact:nth-child(2){margin-left:34px}
+.fact h3{font-size:1.2rem;margin-bottom:4px}
+.fact p{margin:0;font-size:1rem}
+ 
+/* Lokasi */
+.loc .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.hours{width:100%;border-collapse:collapse;margin-top:26px}
+.hours td{padding:12px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;font-weight:700}
+.hours tr.today td{color:var(--cherry);font-weight:700}
+.addr{margin-top:24px;color:var(--ink-2)}
+.addr b{color:var(--ink)}
+.map{border-radius:16px;min-height:340px;position:relative;overflow:hidden;background:
+  linear-gradient(90deg,transparent 48%,#fff 48%,#fff 52%,transparent 52%),
+  linear-gradient(0deg,transparent 30%,#fff 30%,#fff 34%,transparent 34%),
+  linear-gradient(0deg,transparent 68%,#fff 68%,#fff 71%,transparent 71%),
+  linear-gradient(90deg,transparent 18%,#f6f8f1 18%,#f6f8f1 20%,transparent 20%),
+  var(--bg-2);border:1px solid var(--line)}
+.map .pin{position:absolute;left:50%;top:32%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center}
+.map .pin b{background:var(--cherry);color:var(--white);padding:7px 14px;border-radius:99px;font-size:.95rem;white-space:nowrap}
+.map .pin i{width:3px;height:22px;background:var(--cherry)}
+.map .park{position:absolute;left:8%;bottom:10%;width:26%;height:24%;background:#c4d6b4;border-radius:10px}
+.map small{position:absolute;right:14px;bottom:10px;color:var(--ink-2);font-size:.82rem}
+ 
+footer{background:var(--ink);color:#cdbbc3;padding:30px 0;font-size:.95rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+ 
+@media (max-width:860px){
+  section{padding:68px 0}
+  .burger{display:block}
+  .menu{display:none;position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:18px;padding:18px 20px 24px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .hero .wrap,.beans .grid,.story .grid,.loc .grid{grid-template-columns:1fr;gap:40px}
+  .cup{max-width:300px;justify-self:start}
+  .panel{columns:1}
+  .fact:nth-child(2){margin-left:0}
+  .m{grid-template-columns:80px 1fr 30px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.steam path{animation:none}*{transition:none!important}}
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#atas"><img width="30" src="biji-kopi-dalam-bentuk-hati_78370-7108.avif" alt="">Sobat Kopi</a>
+    <button class="burger" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="menu">
+      <li><a href="#biji">Biji minggu ini</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#cerita">Cerita kami</a></li>
+      <li><a href="#lokasi">Jam dan lokasi</a></li>
+      <li><a class="btn" href="https://wa.me/6281200000000">Pesan lewat WhatsApp</a></li>
+    </ul>
+  </div>
+</header>
+ 
+<main id="atas">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h2>Berasal dari biji yang berkualitas dan terpercaya</h2>
+      <p>Kami menyangrai biji dari petani Gayo, Kintamani, dan Flores setiap Selasa, lalu menyeduhnya di meja yang sama tempat duduk Anda.</p>
+      <div class="status" id="status" aria-live="polite"><span class=""></span><span id="status-text">Memeriksa jam buka…</span></div>
+      <div class="cta">
+        <a class="btn btn-fill" href="#menu">Lihat menu</a>
+        <a class="btn btn-out" href="#lokasi">Cari kami</a>
+      </div>
+    </div>
+    <img class="cup" src="" alt="">
+    <!-- <svg class="cup" viewBox="0 0 400 400" role="img" aria-label="Secangkir kopi dilihat dari atas dengan uap tipis">
+      <circle cx="200" cy="215" r="170" fill="#c23a2e"/>
+      <circle cx="200" cy="215" r="138" fill="#fbfcf8"/>
+      <circle cx="200" cy="215" r="108" fill="#e8ecde"/>
+      <path d="M308 215h54a22 22 0 0 1 0 44h-62" fill="none" stroke="#fbfcf8" stroke-width="16" stroke-linecap="round"/>
+      <circle cx="200" cy="215" r="92" fill="#3a2118"/>
+      <path d="M200 270c-30-18-52-40-52-62 0-18 14-30 30-30 11 0 19 6 22 14 3-8 11-14 22-14 16 0 30 12 30 30 0 22-22 44-52 62z" fill="#e9d7bb" transform="translate(0 -8) scale(1)"/>
+      <path d="M200 252c-18-12-30-26-30-38" fill="none" stroke="#c9a77f" stroke-width="5" stroke-linecap="round"/>
+      <g class="steam"><path d="M168 82c-14 14 14 24 0 40"/><path d="M200 70c-14 14 14 24 0 40"/><path d="M232 82c-14 14 14 24 0 40"/></g>
+    </svg> -->
+  </div>
+</section>
+ 
+<section class="beans" id="biji">
+  <div class="wrap grid">
+    <div>
+      <h2>Biji minggu ini: Gayo Wih Pesam</h2>
+      <p>Tiga petani di Aceh Tengah mengolahnya dengan teknik basah. Hasilnya bersih dan manis, dengan sedikit rempah di ujung tegukan. Cocok untuk filter maupun susu.</p>
+      <dl class="spec">
+        <dt>Asal</dt><dd>Aceh Tengah, 1.400 mdpl</dd>
+        <dt>Proses</dt><dd>Washed</dd>
+        <dt>Sangrai</dt><dd>Medium, 12 Oktober</dd>
+        <dt>Tersedia</dt><dd>Bungkus 200 g, Rp 98.000</dd>
+      </dl>
+    </div>
+    <div class="meters">
+      <h3>Cita rasa di cangkir</h3>
+      <div class="m"><span>Manis</span><div class="bar"><b style="width:80%"></b></div><span>4/5</span></div>
+      <div class="m"><span>Asam</span><div class="bar"><b style="width:40%"></b></div><span>2/5</span></div>
+      <div class="m"><span>Body</span><div class="bar"><b style="width:70%"></b></div><span>3,5/5</span></div>
+      <div class="m"><span>Pahit</span><div class="bar"><b style="width:30%"></b></div><span>1,5/5</span></div>
+      <p class="note">Pilihan rasa: gula aren, kayu manis, jeruk bali.</p>
+    </div>
+  </div>
+</section>
+ 
+<section class="menu-sec" id="menu">
+  <div class="wrap">
+    <div class="top">
+      <h2>Menu hari ini</h2>
+      <div class="tabs" role="tablist" aria-label="Kategori menu">
+        <button class="tab" role="tab" id="t-kopi" aria-controls="p-kopi" aria-selected="true">Kopi</button>
+        <button class="tab" role="tab" id="t-non" aria-controls="p-non" aria-selected="false" tabindex="-1">Bukan kopi</button>
+        <button class="tab" role="tab" id="t-makan" aria-controls="p-makan" aria-selected="false" tabindex="-1">Makanan</button>
+      </div>
+    </div>
+ 
+    <div class="panel" id="p-kopi" role="tabpanel" aria-labelledby="t-kopi">
+      <div class="item"><div class="l"><h3>Espresso</h3><span>Rp 20.000</span></div><p>Satu shot, dua kali lipat bila diminta.</p></div>
+      <div class="item"><div class="l"><h3>Americano</h3><span>Rp 24.000</span></div><p>Espresso dan air panas, bisa dingin.</p></div>
+      <div class="item"><div class="l"><h3>Kopi susu Sudut</h3><span>Rp 28.000</span></div><p>Espresso, susu segar, dan gula aren cair.<span class="tag">Paling sering dipesan</span></p></div>
+      <div class="item"><div class="l"><h3>Flat white</h3><span>Rp 30.000</span></div><p>Susu mikrofoam tipis, rasa kopi lebih kuat.</p></div>
+      <div class="item"><div class="l"><h3>V60 biji minggu ini</h3><span>Rp 32.000</span></div><p>Diseduh per gelas, sekitar 4 menit.</p></div>
+      <div class="item"><div class="l"><h3>Es kopi tubruk</h3><span>Rp 22.000</span></div><p>Seduh kasar dengan es batu dan sedikit gula.</p></div>
+    </div>
+ 
+    <div class="panel" id="p-non" role="tabpanel" aria-labelledby="t-non" hidden>
+      <div class="item"><div class="l"><h3>Cokelat Aceh</h3><span>Rp 28.000</span></div><p>Cokelat batangan lokal, susu, tanpa pemanis tambahan.</p></div>
+      <div class="item"><div class="l"><h3>Teh tarik jahe</h3><span>Rp 24.000</span></div><p>Teh hitam, jahe parut, susu kental manis.</p></div>
+      <div class="item"><div class="l"><h3>Matcha susu</h3><span>Rp 30.000</span></div><p>Matcha Kalibening dan susu dingin.</p></div>
+      <div class="item"><div class="l"><h3>Soda jeruk kintamani</h3><span>Rp 26.000</span></div><p>Perasan jeruk segar dan air soda.</p></div>
+    </div>
+ 
+    <div class="panel" id="p-makan" role="tabpanel" aria-labelledby="t-makan" hidden>
+      <div class="item"><div class="l"><h3>Roti bakar srikaya</h3><span>Rp 22.000</span></div><p>Roti tebal, srikaya buatan dapur kami, mentega.</p></div>
+      <div class="item"><div class="l"><h3>Nasi telur balado</h3><span>Rp 34.000</span></div><p>Telur, sambal balado, lalapan, dan nasi hangat.</p></div>
+      <div class="item"><div class="l"><h3>Pisang goreng keju</h3><span>Rp 25.000</span></div><p>Pisang kepok dan keju parut, disajikan hangat.</p></div>
+      <div class="item"><div class="l"><h3>Kue lapis hari ini</h3><span>Rp 18.000</span></div><p>Dibuat tetangga sebelah, jumlahnya terbatas.</p></div>
+    </div>
+    <p class="menu-note">Bisa ditambahkan susu oat dengan tambah harga Rp 5.000/cangkir</p>
+  </div>
+</section>
+ 
+<section class="story" id="cerita">
+  <div class="wrap grid">
+    <div>
+      <h2>Berawal dari garasi yang berukuran kecil</h2>
+      <p>Pada 2019 kami menyangrai 2 kilogram biji per minggu di garasi rumah, lalu menjualnya ke tetangga. Setahun kemudian garasi itu menjadi kedai, dan ukurannya tidak berubah.</p>
+      <p>Kami membeli langsung dari kelompok tani dengan harga di atas pasar, dan menuliskan nama kebunnya di tiap bungkus. Kalau Anda bertanya siapa yang menanam kopi ini, kami bisa menjawabnya.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><h3>Disangrai tiap Selasa</h3><p>Biji yang Anda minum paling lama berumur dua pekan sejak disangrai.</p></div>
+      <div class="fact"><h3>Langsung dari petani</h3><p>berasal dari tujuh kelompok tani di Aceh, Bali, dan Flores.</p></div>
+      <div class="fact"><h3>Gelas bawa sendiri</h3><p>Potongan Rp 3.000 untuk pelanggan yang membawa gelas/tumbler.</p></div>
+    </div>
+  </div>
+</section>
+ 
+<section class="loc" id="lokasi">
+  <div class="wrap grid">
+    <div>
+      <h2>Mampir kapan saja</h2>
+      <p>Kami selalu menemani Anda.</p>
+      <table class="hours" id="hours">
+        <tr data-d="1"><td>Senin</td><td>07.00–21.00</td></tr>
+        <tr data-d="2"><td>Selasa</td><td>07.00–21.00</td></tr>
+        <tr data-d="3"><td>Rabu</td><td>07.00–21.00</td></tr>
+        <tr data-d="4"><td>Kamis</td><td>07.00–21.00</td></tr>
+        <tr data-d="5"><td>Jumat</td><td>07.00–21.00</td></tr>
+        <tr data-d="6"><td>Sabtu</td><td>08.00–22.00</td></tr>
+        <tr data-d="0"><td>Minggu</td><td>08.00–22.00</td></tr>
+      </table>
+      <p class="addr"><b>Jl. Mawar No. 12, sudut Jl. Kenanga</b><br>Parkir motor di depan, mobil di lahan sebelah. Kami menyediakan colokan untuk anda di semua meja.</p>
+    </div>
+    <div class="map" role="img" aria-label="Peta sederhana: Sobat Kopi berada di persimpangan dua jalan">
+      <div class="park"></div>
+      <div class="pin"><b>Sobat Kopi</b><i></i></div>
+      <small>Ilustrasi, bukan peta asli</small>
+    </div>
+  </div>
+</section>
+</main>
+ 
+<footer>
+  <div class="wrap">
+    <span>© 2026 Sobat Kopi</span>
+    <span>@kopisudut · halo@kopisudut.example</span>
+  </div>
+</footer>
+ 
+<script>
+(function(){
+  /* Menu mobile */
+  var burger=document.querySelector('.burger'),menu=document.querySelector('.menu');
+  burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');}});
+ 
+  /* Tab menu (bisa dengan panah kiri/kanan) */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function pick(t){
+    tabs.forEach(function(x){
+      var on=x===t;
+      x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){pick(t);});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
+      if(n===null)return;
+      n=(n+tabs.length)%tabs.length;pick(tabs[n]);tabs[n].focus();
+    });
+  });
+ 
+  /* Status buka/tutup berdasarkan jam perangkat */
+  var H={0:[8,22],6:[8,22],1:[7,21],2:[7,21],3:[7,21],4:[7,21],5:[7,21]};
+  var now=new Date(),d=now.getDay(),h=now.getHours()+now.getMinutes()/60;
+  var s=document.getElementById('status'),t=document.getElementById('status-text');
+  var o=H[d];
+  function pad(n){return (n<10?'0':'')+n+'.00';}
+  if(h>=o[0]&&h<o[1]){s.classList.add('open');t.textContent='Buka tiap hari  ';}
+  else{
+    s.classList.add('closed');
+    var nd=h<o[0]?d:(d+1)%7;
+    t.textContent='Tutup, buka '+(nd===d?'hari ini':'besok')+' pukul '+pad(H[nd][0]);
+  }
+  var row=document.querySelector('#hours tr[data-d="'+d+'"]');
+  if(row)row.classList.add('today');
+})();
+</script>
+</body>
+</html>
+ 
