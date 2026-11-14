@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Meja - Sobat Kopi</title>
+    <style>
+        /* Pengaturan Dasar & Tema Warna Kopi */
+        :root {
+            --primary-coffee: #4A3525;
+            --secondary-coffee: #8C6239;
+            --bg-cream: #F9F6F0;
+            --white: #FFFFFF;
+            --text-dark: #2C221E;
+            --border-color: #DCD3C9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(74, 53, 37, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header Banner */
+        .header {
+            background-color: var(--primary-coffee);
+            color: var(--white);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Form Styling */
+        .booking-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--primary-coffee);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--text-dark);
+            background-color: #FAFAFA;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary-coffee);
+            background-color: var(--white);
+        }
+
+        /* Kebijakan Reservasi */
+        .policy-box {
+            background-color: #F4EFEA;
+            border-left: 4px solid var(--secondary-coffee);
+            padding: 12px 15px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Tombol Submit */
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-coffee);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-coffee);
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 500px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Bagian Header -->
+    <div class="header">
+        <h1>SOBAT KOPI</h1>
+        <p>Reservasi Meja & Ruang Nongkrong Favoritmu</p>
+    </div>
+
+    <!-- Bagian Formulir -->
+    <form class="booking-form" id="formReservasi">
+        
+        <!-- Baris 1: Tanggal & Jam -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="tanggal">Tanggal Kedatangan *</label>
+                <input type="date" id="tanggal" required>
+            </div>
+            <div class="form-group">
+                <label for="jam">Jam Kedatangan *</label>
+                <select id="jam" required>
+                    <option value="">-- Pilih Jam --</option>
+                    <option value="10:00">10:00 WIB</option>
+                    <option value="13:00">13:00 WIB</option>
+                    <option value="16:00">16:00 WIB</option>
+                    <option value="19:00">19:00 WIB</option>
+                    <option value="20:30">20:30 WIB</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Baris 2: Jumlah Orang & Area -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="jumlah">Jumlah Tamu *</label>
+                <select id="jumlah" required>
+                    <option value="1-2 Orang">1 - 2 Orang</option>
+                    <option value="3-4 Orang">3 - 4 Orang</option>
+                    <option value="5-8 Orang">5 - 8 Orang</option>
+                    <option value="Lebih dari 8 Orang">8+ Orang (Grup Besar)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="area">Pilihan Area *</label>
+                <select id="area" required>
+                    <option value="Indoor (Non-Smoking / AC)">Indoor (AC / Non-Smoking)</option>
+                    <option value="Outdoor (Smoking Area)">Outdoor (Smoking Area)</option>
+                    <option value="VIP / Meeting Room">VIP / Meeting Room</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Baris 3: Data Pemesan -->
+        <div class="form-group">
+            <label for="nama">Nama Pemesan *</label>
+            <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" required>
+        </div>
+
+        <div class="form-group">
+            <label for="whatsapp">Nomor WhatsApp *</label>
+            <input type="tel" id="whatsapp" placeholder="Contoh: 081234567890" required>
+        </div>
+
+        <!-- Baris 4: Catatan Khusus -->
+        <div class="form-group">
+            <label for="catatan">Catatan Khusus (Opsional)</label>
+            <textarea id="catatan" rows="3" placeholder="Contoh: Butuh stopkontak dekat meja, kursi bayi, atau acara ulang tahun..."></textarea>
+        </div>
+
+        <!-- Informasi Kebijakan -->
+        <div class="policy-box">
+            <strong>Catatan Sobat Kopi:</strong> Meja akan ditahan maksimal <strong>20 menit</strong> dari jam reservasi. Jika terlambat tanpa konfirmasi, meja akan dialihkan ke pelanggan lain.
+        </div>
+
+        <!-- Tombol Kirim -->
+        <button type="submit" class="btn-submit">Konfirmasi Booking via WhatsApp</button>
+    </form>
+</div>
+
+<!-- Script untuk mengirim data form ke WhatsApp -->
+<script>
+    // Mengatur tanggal minimal hari ini agar tidak bisa pilih tanggal kemarin
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('tanggal').setAttribute('min', today);
+
+    document.getElementById('formReservasi').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Ganti nomor di bawah ini dengan nomor WhatsApp admin Sobat Kopi (gunakan kode negara 62)
+        const nomorAdmin = "6281234567890"; 
+
+        // Mengambil nilai dari form
+        const tanggal = document.getElementById('tanggal').value;
+        const jam = document.getElementById('jam').value;
+        const jumlah = document.getElementById('jumlah').value;
+        const area = document.getElementById('area').value;
+        const nama = document.getElementById('nama').value;
+        const whatsapp = document.getElementById('whatsapp').value;
+        const catatan = document.getElementById('catatan').value || "-";
+
+        // Menyusun format pesan WhatsApp
+        const pesan = `Halo *Sobat Kopi*, saya ingin reservasi meja dengan detail berikut:%0A%0A` +
+                      `👤 *Nama:* ${nama}%0A` +
+                      `📱 *No. WA:* ${whatsapp}%0A` +
+                      `📅 *Tanggal:* ${tanggal}%0A` +
+                      `⏰ *Jam:* ${jam} WIB%0A` +
+                      `👥 *Jumlah Tamu:* ${jumlah}%0A` +
+                      `📍 *Area:* ${area}%0A` +
+                      `📝 *Catatan:* ${catatan}%0A%0A` +
+                      `Mohon konfirmasi ketersediaan mejanya ya. Terima kasih!`;
+
+        // Membuka WhatsApp Web / Aplikasi WA
+        const urlWA = `https://wa.me{nomorAdmin}?text=${pesan}`;
+        window.open(urlWA, '_blank');
+    });
+</script>
+
+</body>
+</html>

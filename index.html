@@ -1,332 +1,1460 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sobat Kopi – Kedai kopi dengan biji sangrai sendiri</title>
-<meta name="description" content="Kedai kopi lokal dengan biji Nusantara yang disangrai tiap pekan. Lihat menu, biji minggu ini, dan jam buka.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#edf1e8; --bg-2:#dde5d3; --ink:#2b1823; --ink-2:#5b4651;
-  --cherry:#c23a2e; --cherry-dark:#9f2b21; --leaf:#4f6b45; --white:#fbfcf8; --line:#c9d3bd;
-  --display:"Gabarito","Trebuchet MS",sans-serif; --body:"Karla","Segoe UI",system-ui,sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{font-family:var(--body);font-size:18px;line-height:1.6;color:var(--ink);background:var(--bg)}
-svg{display:block;max-width:100%}
-a{color:inherit}
-h1,h2,h3{font-family:var(--display);line-height:1.08;letter-spacing:-.015em}
-h2{font-size:clamp(2rem,4vw,3rem);font-weight:800}
-p{max-width:58ch}
-.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
-section{padding:96px 0}
-:focus-visible{outline:3px solid var(--cherry);outline-offset:3px}
-.btn{display:inline-block;font:700 1rem var(--body);text-decoration:none;padding:14px 26px;border-radius:99px;border:2px solid var(--ink);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
-.btn-fill{background:var(--cherry);border-color:var(--cherry);color:var(--white)}
-.btn-fill:hover{background:var(--cherry-dark);border-color:var(--cherry-dark)}
-.btn-out:hover{background:var(--ink);color:var(--white)}
- 
-/* Navigasi */
-header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
-.nav{display:flex;justify-content:space-between;align-items:center;height:66px}
-.logo{font:800 1.45rem var(--display);text-decoration:none;display:flex;gap:9px;align-items:center}
-.logo i{width:16px;height:16px;border-radius:50%;background:var(--cherry);display:block}
-.menu{display:flex;gap:28px;list-style:none;align-items:center}
-.menu a{text-decoration:none;font-weight:500}
-.menu a:hover{color:var(--cherry)}
-.menu .btn{padding:8px 20px;color:var(--white);background:var(--ink)}
-.menu .btn:hover{background:var(--cherry);color:var(--white)}
-.burger{display:none;width:44px;height:44px;background:none;border:0;cursor:pointer}
-.burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px auto}
- 
-/* Hero */
-.hero{padding:70px 0 90px}
-.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:50px;align-items:center}
-.hero h1{font-size:clamp(2.6rem,6.4vw,5.1rem);font-weight:800;max-width:12ch}
-.hero p{margin-top:22px;font-size:1.2rem;color:var(--ink-2)}
-.status{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:8px 16px 8px 12px;border-radius:99px;background:var(--white);border:1px solid var(--line);font-weight:500;font-size:.98rem}
-.dot{width:10px;height:10px;border-radius:50%;background:#9a9a9a}
-.status.open .dot{background:#2f9e4f;box-shadow:0 0 0 4px rgba(47,158,79,.2)}
-.status.closed .dot{background:var(--cherry)}
-.cta{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap}
-.cup{width:100%;max-width:440px;justify-self:center}
-.steam path{stroke:var(--ink-2);stroke-width:4;fill:none;stroke-linecap:round;opacity:.5;animation:steam 4s ease-in-out infinite}
-.steam path:nth-child(2){animation-delay:.8s}
-.steam path:nth-child(3){animation-delay:1.6s}
-@keyframes steam{0%,100%{transform:translateY(0);opacity:.15}50%{transform:translateY(-8px);opacity:.55}}
- 
-/* Biji minggu ini */
-.beans{background:var(--ink);color:var(--white)}
-.beans .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-.beans p{color:#e3d6dc;margin-top:18px}
-.spec{margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:6px 24px;font-size:1rem}
-.spec dt{color:#bfa9b3}
-.spec dd{font-weight:700}
-.meters{background:#3a2431;border-radius:16px;padding:32px;display:grid;gap:22px}
-.meters h3{font-size:1.3rem}
-.m{display:grid;grid-template-columns:90px 1fr 34px;gap:14px;align-items:center;font-size:1rem}
-.bar{height:10px;border-radius:99px;background:#563a49;overflow:hidden}
-.bar b{display:block;height:100%;background:#e4a79f;border-radius:99px}
-.note{font-size:.95rem;color:#d3c0c8}
- 
-/* Menu */
-.menu-sec .top{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:34px}
-.tabs{display:flex;gap:8px;background:var(--bg-2);padding:5px;border-radius:99px}
-.tab{font:700 1rem var(--body);padding:9px 22px;border:0;background:none;border-radius:99px;cursor:pointer;color:var(--ink-2)}
-.tab[aria-selected="true"]{background:var(--ink);color:var(--white)}
-.panel{columns:2;column-gap:60px}
-.panel[hidden]{display:none}
-.item{break-inside:avoid;padding:14px 0}
-.item .l{display:flex;align-items:baseline;gap:10px}
-.item h3{font-size:1.2rem;font-weight:700}
-.item .l::after{content:"";order:1;flex:1;border-bottom:2px dotted #a9b59c;transform:translateY(-4px)}
-.item .l span{order:2;font-weight:700}
-.item p{font-size:.98rem;color:var(--ink-2);margin-top:2px}
-.tag{font-size:.82rem;font-weight:700;color:var(--cherry);margin-left:6px}
-.menu-note{margin-top:28px;color:var(--ink-2);font-size:.98rem}
- 
-/* Cerita */
-.story{background:var(--bg-2)}
-.story .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
-.story p{margin-top:18px;color:var(--ink-2)}
-.story p:first-of-type{margin-top:22px}
-.facts{display:grid;gap:20px;align-content:start}
-.fact{background:var(--white);border-radius:14px;padding:22px 26px}
-.fact:nth-child(2){margin-left:34px}
-.fact h3{font-size:1.2rem;margin-bottom:4px}
-.fact p{margin:0;font-size:1rem}
- 
-/* Lokasi */
-.loc .grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}
-.hours{width:100%;border-collapse:collapse;margin-top:26px}
-.hours td{padding:12px 0;border-bottom:1px solid var(--line)}
-.hours td:last-child{text-align:right;font-weight:700}
-.hours tr.today td{color:var(--cherry);font-weight:700}
-.addr{margin-top:24px;color:var(--ink-2)}
-.addr b{color:var(--ink)}
-.map{border-radius:16px;min-height:340px;position:relative;overflow:hidden;background:
-  linear-gradient(90deg,transparent 48%,#fff 48%,#fff 52%,transparent 52%),
-  linear-gradient(0deg,transparent 30%,#fff 30%,#fff 34%,transparent 34%),
-  linear-gradient(0deg,transparent 68%,#fff 68%,#fff 71%,transparent 71%),
-  linear-gradient(90deg,transparent 18%,#f6f8f1 18%,#f6f8f1 20%,transparent 20%),
-  var(--bg-2);border:1px solid var(--line)}
-.map .pin{position:absolute;left:50%;top:32%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center}
-.map .pin b{background:var(--cherry);color:var(--white);padding:7px 14px;border-radius:99px;font-size:.95rem;white-space:nowrap}
-.map .pin i{width:3px;height:22px;background:var(--cherry)}
-.map .park{position:absolute;left:8%;bottom:10%;width:26%;height:24%;background:#c4d6b4;border-radius:10px}
-.map small{position:absolute;right:14px;bottom:10px;color:var(--ink-2);font-size:.82rem}
- 
-footer{background:var(--ink);color:#cdbbc3;padding:30px 0;font-size:.95rem}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
- 
-@media (max-width:860px){
-  section{padding:68px 0}
-  .burger{display:block}
-  .menu{display:none;position:absolute;top:66px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:18px;padding:18px 20px 24px;background:var(--bg);border-bottom:1px solid var(--line)}
-  .menu.open{display:flex}
-  .hero .wrap,.beans .grid,.story .grid,.loc .grid{grid-template-columns:1fr;gap:40px}
-  .cup{max-width:300px;justify-self:start}
-  .panel{columns:1}
-  .fact:nth-child(2){margin-left:0}
-  .m{grid-template-columns:80px 1fr 30px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.steam path{animation:none}*{transition:none!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sobat Kopi – Kedai kopi dengan biji sangrai sendiri</title>
+  <meta name="description" content="Kedai kopi lokal dengan biji Nusantara yang disangrai tiap pekan. Lihat menu, biji minggu ini, dan jam buka.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f0e7;
+      --bg-2: #e9dfcf;
+      --panel: #fffdf8;
+      --ink: #2e211b;
+      --ink-2: #59483d;
+      --muted: #897362;
+      --line: rgba(46, 33, 27, 0.12);
+      --cherry: #a45b37;
+      --cherry-dark: #78402b;
+      --gold: #c99a58;
+      --leaf: #52654b;
+      --white: #ffffff;
+      --shadow: 0 24px 60px rgba(35, 25, 22, 0.12);
+      --display: "Gabarito", "Trebuchet MS", sans-serif;
+      --body: "Karla", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: var(--body);
+      background: linear-gradient(180deg, #fbf8f1 0%, #f3ecdf 100%);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 18px;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--display); letter-spacing: -0.03em; line-height: 1.08; }
+    h2 { font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 0.7rem; }
+    p { max-width: 60ch; color: var(--ink-2); }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    section { padding: 96px 0; }
+    :focus-visible { outline: 3px solid var(--cherry); outline-offset: 4px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid var(--ink);
+      transition: 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--cherry);
+      border-color: var(--cherry);
+      color: var(--white);
+      box-shadow: 0 12px 26px rgba(179, 72, 57, 0.22);
+    }
+    .btn-primary:hover { background: var(--cherry-dark); border-color: var(--cherry-dark); }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink);
+      border-color: rgba(34, 24, 20, 0.15);
+    }
+    .btn-secondary:hover { background: var(--ink); color: var(--white); }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(251, 248, 241, 0.88);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 24px;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 10px 24px rgba(161, 66, 46, 0.2);
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      list-style: none;
+      font-weight: 600;
+    }
+    .menu a { color: var(--ink-2); }
+    .menu a:hover { color: var(--cherry); }
+    .menu .btn {
+      padding: 10px 18px;
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+      font-size: 0.95rem;
+    }
+    .menu .btn:hover { background: var(--cherry); border-color: var(--cherry); }
+    .burger {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.4);
+    }
+    .burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      margin: 5px auto;
+      border-radius: 2px;
+    }
+
+    .hero {
+      padding-top: 64px;
+      padding-bottom: 64px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 82% 18%, rgba(201,154,88,0.18), transparent 34%),
+        linear-gradient(135deg, #fbf8f1 0%, #f1e7d8 100%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(34,24,20,0.08);
+      color: var(--ink-2);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2ea65b;
+      box-shadow: 0 0 0 6px rgba(46, 166, 91, 0.15);
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(34,24,20,0.08);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ink-2);
+    }
+    .status .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #9d9a9a;
+      display: inline-block;
+    }
+    .status.open .dot {
+      background: #2ea65b;
+      box-shadow: 0 0 0 6px rgba(46, 166, 91, 0.12);
+    }
+    .status.closed .dot {
+      background: var(--cherry);
+      box-shadow: 0 0 0 6px rgba(179,72,57,0.12);
+    }
+    .hero-copy h1 {
+      margin-top: 18px;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      max-width: 540px;
+    }
+    .hero-copy h1 span { color: var(--cherry); }
+    .hero-copy p {
+      margin-top: 20px;
+      font-size: 1.12rem;
+      color: var(--ink-2);
+    }
+    .cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .mini-stats {
+      margin-top: 28px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .mini-stats div {
+      padding: 16px 18px;
+      min-width: 140px;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(34,24,20,0.08);
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(34,24,20,0.04);
+    }
+    .mini-stats strong {
+      display: block;
+      font-size: 1.45rem;
+      font-family: var(--display);
+      color: var(--ink);
+    }
+    .mini-stats span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .media-wrap {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 560px;
+    }
+    .photo-stack {
+      position: relative;
+      width: min(500px, 100%);
+      aspect-ratio: 4 / 5;
+    }
+    .photo-main,
+    .photo-card,
+    .badge-box {
+      position: absolute;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .photo-main {
+      inset: 0 30px 60px 0;
+      border: 6px solid rgba(255,253,248,0.72);
+    }
+    .photo-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-card {
+      width: 175px;
+      height: 190px;
+      right: 0;
+      bottom: 32px;
+      border: 6px solid rgba(255,253,248,0.82);
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .badge-box {
+      left: 20px;
+      bottom: 0;
+      padding: 18px 18px 12px;
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(34,24,20,0.08);
+      backdrop-filter: blur(8px);
+    }
+    .badge-box strong {
+      display: block;
+      font-size: 1.8rem;
+      font-family: var(--display);
+      color: var(--ink);
+      line-height: 1;
+    }
+    .badge-box span {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .feature-strip {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .feature {
+      display: flex;
+      gap: 16px;
+      padding: 22px 20px;
+      background: rgba(255,253,248,0.74);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 40px rgba(34,24,20,0.04);
+    }
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(164,91,55,0.14), rgba(201,154,88,0.35));
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .feature h3 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+    .feature p {
+      font-size: 0.97rem;
+      color: var(--muted);
+    }
+
+    .beans {
+      background: linear-gradient(135deg, #2e211b 0%, #493329 100%);
+      color: var(--white);
+    }
+    .beans .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .beans p,
+    .beans .note,
+    .beans .spec dt,
+    .beans .spec dd { color: rgba(255,255,255,0.78); }
+    .beans .spec {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 10px 18px;
+      font-size: 1rem;
+    }
+    .beans .spec dt { font-weight: 700; }
+    .beans .spec dd { font-weight: 700; }
+    .beans-visual {
+      position: relative;
+      min-height: 420px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .beans-visual img { width: 100%; height: 100%; object-fit: cover; }
+    .beans-card {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(24, 18, 17, 0.72);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+    }
+    .beans-card strong {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      display: block;
+    }
+
+    .meters {
+      padding: 30px 26px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      gap: 18px;
+    }
+    .meters h3 {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+    .m {
+      display: grid;
+      grid-template-columns: 90px 1fr 52px;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.98rem;
+    }
+    .bar {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      overflow: hidden;
+    }
+    .bar b {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #dca46d 0%, #f3d5a4 100%);
+    }
+
+    .menu-sec .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 999px;
+      background: rgba(34,24,20,0.05);
+      border: 1px solid rgba(34,24,20,0.06);
+    }
+    .tab {
+      border: 0;
+      background: transparent;
+      color: var(--ink-2);
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 11px 18px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .tab[aria-selected="true"] {
+      background: var(--cherry-dark);
+      color: var(--white);
+    }
+    .panel {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 28px;
+      padding-top: 8px;
+    }
+    .panel[hidden] { display: none; }
+    .item {
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 36px rgba(34, 24, 20, 0.04);
+    }
+    .item-thumb {
+      height: 170px;
+      overflow: hidden;
+      background: rgba(34,24,20,0.04);
+    }
+    .item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    .item:hover .item-thumb img {
+      transform: scale(1.05);
+    }
+    .item-body {
+      padding: 20px 20px 18px;
+    }
+    .item .l {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .item .l::after {
+      content: "";
+      flex: 1;
+      border-bottom: 2px dotted rgba(34,24,20,0.15);
+      transform: translateY(-4px);
+    }
+    .item h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .item .l span {
+      font-weight: 700;
+      color: var(--cherry);
+      white-space: nowrap;
+    }
+    .item p {
+      font-size: 0.97rem;
+      max-width: none;
+      color: var(--ink-2);
+    }
+    .tag {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 0.77rem;
+      font-weight: 700;
+      color: var(--cherry);
+      background: rgba(179,72,57,0.08);
+      padding: 3px 7px;
+      border-radius: 999px;
+      vertical-align: middle;
+    }
+    .menu-note {
+      margin-top: 26px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .story {
+      background: linear-gradient(180deg, rgba(233,223,207,0.8), rgba(251,248,241,0.9));
+    }
+    .story .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .story p {
+      margin-top: 18px;
+      font-size: 1.05rem;
+      color: var(--ink-2);
+    }
+    .facts {
+      display: grid;
+      gap: 18px;
+    }
+    .fact {
+      padding: 22px 22px 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(34,24,20,0.06);
+      box-shadow: 0 16px 36px rgba(34,24,20,0.04);
+    }
+    .fact:nth-child(2) { margin-left: 24px; }
+    .fact h3 { font-size: 1.2rem; margin-bottom: 6px; }
+    .fact p { margin-top: 0; font-size: 0.97rem; color: var(--muted); }
+
+    .gallery {
+      padding-top: 0;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      min-height: 340px;
+      box-shadow: var(--shadow);
+    }
+    .gallery-item.large { min-height: 420px; }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-item .label {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      background: rgba(28, 17, 16, 0.72);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .location-box {
+      background: linear-gradient(180deg, rgba(255,253,248,0.92), rgba(239,229,212,0.92));
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 30px;
+      box-shadow: 0 20px 48px rgba(34,24,20,0.04);
+    }
+    .loc .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 46px;
+      align-items: center;
+    }
+    .hours {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .hours td {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(34,24,20,0.08);
+      font-size: 1rem;
+    }
+    .hours td:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .hours tr.today td { color: var(--cherry); }
+    .addr {
+      margin-top: 22px;
+      font-size: 1rem;
+      color: var(--ink-2);
+      line-height: 1.8;
+    }
+    .map {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(234,233,227,0.8), rgba(215,226,209,0.86)),
+        url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      border: 1px solid rgba(34,24,20,0.08);
+      box-shadow: var(--shadow);
+    }
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.18);
+    }
+    .pin {
+      position: absolute;
+      left: 50%;
+      top: 38%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .pin b {
+      display: inline-block;
+      background: var(--cherry);
+      color: var(--white);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      box-shadow: 0 12px 28px rgba(179,72,57,0.3);
+    }
+    .pin i {
+      width: 4px;
+      height: 28px;
+      background: var(--cherry);
+      border-radius: 999px;
+    }
+    .map-note {
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      z-index: 2;
+      color: rgba(34,24,20,0.74);
+      font-size: 0.78rem;
+      background: rgba(255,255,255,0.7);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(34,24,20,0.08);
+    }
+
+    .cta-banner {
+      margin-top: 30px;
+      padding: 30px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      background: linear-gradient(135deg, #a45b37, #78402b);
+      border-radius: 28px;
+      color: var(--white);
+      box-shadow: 0 24px 48px rgba(138, 53, 45, 0.25);
+    }
+    .cta-banner h3 {
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      margin-bottom: 8px;
+    }
+    .cta-banner p {
+      color: rgba(255,255,255,0.82);
+      max-width: none;
+    }
+    .cta-banner .btn {
+      background: var(--white);
+      color: var(--ink);
+      border-color: var(--white);
+      box-shadow: none;
+    }
+    .cta-banner .btn:hover {
+      background: #f7ebdd;
+      border-color: #f7ebdd;
+    }
+
+    .booking {
+      background: #e9dfcf;
+    }
+    .booking-card {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 48px;
+      padding: clamp(24px, 5vw, 56px);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+    }
+    .booking-copy { align-self: center; }
+    .booking-copy .eyebrow { background: #f4ead9; }
+    .booking-copy h2 { margin-top: 20px; }
+    .booking-copy p { margin-top: 14px; }
+    .booking-note {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--gold);
+      background: #f7f1e6;
+      border-radius: 0 14px 14px 0;
+      font-size: 0.95rem;
+    }
+    .booking-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-content: center;
+    }
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 0.92rem; font-weight: 700; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffefa;
+      color: var(--ink);
+      font: inherit;
+      font-size: 1rem;
+    }
+    .field textarea { min-height: 90px; resize: vertical; }
+    .booking-form .btn { grid-column: 1 / -1; justify-self: start; }
+    .booking-hint { grid-column: 1 / -1; font-size: 0.85rem; color: var(--muted); }
+
+    footer {
+      background: #2e211b;
+      color: rgba(255,255,255,0.8);
+      padding: 24px 0;
+      font-size: 0.95rem;
+    }
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .beans .grid,
+      .story .grid,
+      .loc .grid,
+      .feature-strip,
+      .panel,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .feature-strip { gap: 16px; }
+      .photo-stack { width: min(420px, 100%); }
+      .hero-copy h1 { max-width: 16ch; }
+      .fact:nth-child(2) { margin-left: 0; }
+      .gallery-item.large { min-height: 300px; }
+      .booking-card { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    @media (max-width: 760px) {
+      section { padding: 72px 0; }
+      .burger { display: block; }
+      .menu {
+        display: none;
+        position: absolute;
+        top: 74px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 18px 16px 22px;
+        background: rgba(251,248,241,0.98);
+        border-bottom: 1px solid rgba(34,24,20,0.08);
+      }
+      .menu.open { display: flex; }
+      .menu .btn { width: 100%; }
+      .hero-copy h1 { font-size: clamp(2.6rem, 15vw, 4rem); }
+      .mini-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cta-banner { padding: 24px 22px; }
+      .booking-form { grid-template-columns: 1fr; }
+      .field.full, .booking-form .btn, .booking-hint { grid-column: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+     /* Pengaturan Dasar & Tema Warna Kopi */
+        :root {
+            --primary-coffee: #4A3525;
+            --secondary-coffee: #8C6239;
+            --bg-cream: #F9F6F0;
+            --white: #FFFFFF;
+            --text-dark: #2C221E;
+            --border-color: #DCD3C9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(74, 53, 37, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header Banner */
+        .header {
+            background-color: var(--primary-coffee);
+            color: var(--white);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Form Styling */
+        .booking-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--primary-coffee);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--text-dark);
+            background-color: #FAFAFA;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary-coffee);
+            background-color: var(--white);
+        }
+
+        /* Kebijakan Reservasi */
+        .policy-box {
+            background-color: #F4EFEA;
+            border-left: 4px solid var(--secondary-coffee);
+            padding: 12px 15px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Tombol Submit */
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-coffee);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-coffee);
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 500px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+  </style>
 </head>
 <body>
- 
-<header>
-  <div class="wrap nav">
-    <a class="logo" href="#atas"><img width="30" src="biji-kopi-dalam-bentuk-hati_78370-7108.avif" alt="">Sobat Kopi</a>
-    <button class="burger" aria-label="Buka menu" aria-expanded="false"><span></span><span></span><span></span></button>
-    <ul class="menu">
-      <li><a href="#biji">Biji minggu ini</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#cerita">Cerita kami</a></li>
-      <li><a href="#lokasi">Jam dan lokasi</a></li>
-      <li><a class="btn" href="https://wa.me/6281200000000">Pesan lewat WhatsApp</a></li>
-    </ul>
-  </div>
-</header>
- 
-<main id="atas">
-<section class="hero">
-  <div class="wrap">
-    <div>
-      <h2>Berasal dari biji yang berkualitas dan terpercaya</h2>
-      <p>Kami menyangrai biji dari petani Gayo, Kintamani, dan Flores setiap Selasa, lalu menyeduhnya di meja yang sama tempat duduk Anda.</p>
-      <div class="status" id="status" aria-live="polite"><span class=""></span><span id="status-text">Memeriksa jam buka…</span></div>
-      <div class="cta">
-        <a class="btn btn-fill" href="#menu">Lihat menu</a>
-        <a class="btn btn-out" href="#lokasi">Cari kami</a>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#atas" aria-label="Sobat Kopi home">
+        <img class="logo-mark" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=120&q=80" alt="">
+        Sobat Kopi<span class="logo-dot"></span>
+      </a>
+
+      <button class="burger" aria-label="Buka menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="menu">
+        <li><a href="#biji">Kopi pilihan</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#cerita">Tentang kami</a></li>
+        <li><a href="#lokasi">Lokasi</a></li>
+        <li><a class="btn" href="#booking">Reservasi meja</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="atas">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <!-- <span class="eyebrow">Kopi lokal, suasana akrab</span> -->
+          <h1>Ruang kecil untuk <span>cerita besar.</span></h1>
+          <p>Temukan kopi pilihan Nusantara, kudapan hangat, dan sudut nyaman untuk menikmati waktu tanpa terburu-buru.</p>
+
+          <!-- <div class="status" id="status" aria-live="polite">
+            <span class="dot"></span>
+            <span id="status-text">Memeriksa jam buka…</span>
+          </div> -->
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#menu">Lihat menu</a>
+            <a class="btn btn-secondary" href="#booking">Pesan meja</a>
+          </div>
+
+          <div class="mini-stats">
+            <div>
+              <strong>3K+</strong>
+              <span>pelanggan setia</span>
+            </div>
+            <div>
+              <strong>7</strong>
+              <span>mitra petani</span>
+            </div>
+            <div>
+              <strong>4.9/5</strong>
+              <span>rating pelanggan</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-wrap" aria-label="Foto interior kafe dan kopi">
+          <div class="photo-stack">
+            <div class="photo-main">
+              <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80" alt="Secangkir kopi hitam di meja kayu">
+            </div>
+            <div class="photo-card">
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80" alt="Kopi hangat disajikan di cangkir">
+            </div>
+            <!-- <div class="badge-box">
+              <strong>92%</strong>
+              <span>pelanggan datang kembali</span>
+            </div> -->
+          </div>
+        </div>
       </div>
-    </div>
-    <img class="cup" src="" alt="">
-    <!-- <svg class="cup" viewBox="0 0 400 400" role="img" aria-label="Secangkir kopi dilihat dari atas dengan uap tipis">
-      <circle cx="200" cy="215" r="170" fill="#c23a2e"/>
-      <circle cx="200" cy="215" r="138" fill="#fbfcf8"/>
-      <circle cx="200" cy="215" r="108" fill="#e8ecde"/>
-      <path d="M308 215h54a22 22 0 0 1 0 44h-62" fill="none" stroke="#fbfcf8" stroke-width="16" stroke-linecap="round"/>
-      <circle cx="200" cy="215" r="92" fill="#3a2118"/>
-      <path d="M200 270c-30-18-52-40-52-62 0-18 14-30 30-30 11 0 19 6 22 14 3-8 11-14 22-14 16 0 30 12 30 30 0 22-22 44-52 62z" fill="#e9d7bb" transform="translate(0 -8) scale(1)"/>
-      <path d="M200 252c-18-12-30-26-30-38" fill="none" stroke="#c9a77f" stroke-width="5" stroke-linecap="round"/>
-      <g class="steam"><path d="M168 82c-14 14 14 24 0 40"/><path d="M200 70c-14 14 14 24 0 40"/><path d="M232 82c-14 14 14 24 0 40"/></g>
-    </svg> -->
-  </div>
-</section>
- 
-<section class="beans" id="biji">
-  <div class="wrap grid">
-    <div>
-      <h2>Biji minggu ini: Gayo Wih Pesam</h2>
-      <p>Tiga petani di Aceh Tengah mengolahnya dengan teknik basah. Hasilnya bersih dan manis, dengan sedikit rempah di ujung tegukan. Cocok untuk filter maupun susu.</p>
-      <dl class="spec">
-        <dt>Asal</dt><dd>Aceh Tengah, 1.400 mdpl</dd>
-        <dt>Proses</dt><dd>Washed</dd>
-        <dt>Sangrai</dt><dd>Medium, 12 Oktober</dd>
-        <dt>Tersedia</dt><dd>Bungkus 200 g, Rp 98.000</dd>
-      </dl>
-    </div>
-    <div class="meters">
-      <h3>Cita rasa di cangkir</h3>
-      <div class="m"><span>Manis</span><div class="bar"><b style="width:80%"></b></div><span>4/5</span></div>
-      <div class="m"><span>Asam</span><div class="bar"><b style="width:40%"></b></div><span>2/5</span></div>
-      <div class="m"><span>Body</span><div class="bar"><b style="width:70%"></b></div><span>3,5/5</span></div>
-      <div class="m"><span>Pahit</span><div class="bar"><b style="width:30%"></b></div><span>1,5/5</span></div>
-      <p class="note">Pilihan rasa: gula aren, kayu manis, jeruk bali.</p>
-    </div>
-  </div>
-</section>
- 
-<section class="menu-sec" id="menu">
-  <div class="wrap">
-    <div class="top">
-      <h2>Menu hari ini</h2>
-      <div class="tabs" role="tablist" aria-label="Kategori menu">
-        <button class="tab" role="tab" id="t-kopi" aria-controls="p-kopi" aria-selected="true">Kopi</button>
-        <button class="tab" role="tab" id="t-non" aria-controls="p-non" aria-selected="false" tabindex="-1">Bukan kopi</button>
-        <button class="tab" role="tab" id="t-makan" aria-controls="p-makan" aria-selected="false" tabindex="-1">Makanan</button>
+
+      <div class="wrap feature-strip">
+        <article class="feature">
+          <!-- <div class="icon" aria-hidden="true">☕</div> -->
+          <div>
+            <h3>Kopi lokal terbaik</h3>
+            <p>Dipilih langsung dari petani dan disangrai secara berkala.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <!-- <div class="icon" aria-hidden="true">🥐</div> -->
+          <div>
+            <h3>Rasa yang hangat</h3>
+            <p>Menu snack dan pastry yang cocok untuk nongkrong santai.</p>
+          </div>
+        </article>
+        <article class="feature">
+          <!-- <div class="icon">✨</div> -->
+          <div>
+            <h3>Ruang bersantai</h3>
+            <p>Interior cozy, nyaman untuk kerja, curhat, atau sekadar bersantai.</p>
+          </div>
+        </article>
       </div>
+    </section>
+
+    <section class="beans" id="biji">
+      <div class="wrap grid">
+        <div>
+          <h2>Biji minggu ini: Gayo Wih Pesam</h2>
+          <p>Tiga petani di Aceh Tengah mengolahnya dengan teknik basah. Hasilnya bersih dan manis, dengan sedikit rempah di ujung tegukan. Cocok untuk filter maupun susu.</p>
+
+          <dl class="spec">
+            <dt>Asal</dt><dd>Aceh Tengah, 1.400 mdpl</dd>
+            <dt>Proses</dt><dd>Washed</dd>
+            <dt>Sangrai</dt><dd>Medium, 12 Oktober</dd>
+            <dt>Tersedia</dt><dd>Bungkus 200 g, Rp 98.000</dd>
+          </dl>
+        </div>
+
+        <div>
+          <div class="beans-visual" aria-label="Biji kopi yang siap diseduh">
+            <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80" alt="Biji kopi segar di meja">
+            <div class="beans-card">
+              <strong>4.8/5</strong>
+              <span>rasa paling diminati</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top: 26px;">
+        <div class="meters">
+          <h3>Cita rasa di cangkir</h3>
+          <div class="m"><span>Manis</span><div class="bar"><b style="width:80%"></b></div><span>4/5</span></div>
+          <div class="m"><span>Asam</span><div class="bar"><b style="width:40%"></b></div><span>2/5</span></div>
+          <div class="m"><span>Body</span><div class="bar"><b style="width:70%"></b></div><span>3,5/5</span></div>
+          <div class="m"><span>Pahit</span><div class="bar"><b style="width:30%"></b></div><span>1,5/5</span></div>
+          <p class="note">Pilihan rasa: gula aren, kayu manis, jeruk bali.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-sec" id="menu">
+      <div class="wrap">
+        <div class="top">
+          <h2>Menu hari ini</h2>
+          <div class="tabs" role="tablist" aria-label="Kategori menu">
+            <button class="tab" role="tab" id="t-kopi" aria-controls="p-kopi" aria-selected="true">Kopi</button>
+            <button class="tab" role="tab" id="t-non" aria-controls="p-non" aria-selected="false" tabindex="-1">Bukan kopi</button>
+            <button class="tab" role="tab" id="t-makan" aria-controls="p-makan" aria-selected="false" tabindex="-1">Makanan</button>
+          </div>
+        </div>
+
+        <div class="panel" id="p-kopi" role="tabpanel" aria-labelledby="t-kopi">
+          <div class="item">
+            <div class="item-thumb"><img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80" alt="Espresso"></div>
+            <div class="item-body"><div class="l"><h3>Espresso</h3><span>Rp 20.000</span></div><p>Satu shot, dua kali lipat bila diminta.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="americano.avif" alt="Americano"></div>
+            <div class="item-body"><div class="l"><h3>Americano</h3><span>Rp 24.000</span></div><p>Espresso dan air panas, bisa dingin.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="image.png" alt="Kopi susu Sudut"></div>
+            <div class="item-body"><div class="l"><h3>Kopi susu</h3><span>Rp 28.000</span></div><p>Espresso, susu segar, dan gula aren cair.<span class="tag">Favorite</span></p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="flat-white2.png" alt="Flat white"></div>
+            <div class="item-body"><div class="l"><h3>Flat white</h3><span>Rp 30.000</span></div><p>Susu mikrofoam tipis, rasa kopi lebih kuat.</p></div>
+          </div>
+          <!-- <div class="item">
+            <div class="item-thumb"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80" alt="V60 biji minggu ini"></div>
+            <div class="item-body"><div class="l"><h3>V60 biji minggu ini</h3><span>Rp 32.000</span></div><p>Diseduh per gelas, sekitar 4 menit.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=900&q=80" alt="Es kopi tubruk"></div>
+            <div class="item-body"><div class="l"><h3>Es kopi tubruk</h3><span>Rp 22.000</span></div><p>Seduh kasar dengan es batu dan sedikit gula.</p></div>
+          </div> -->
+        </div>
+
+        <div class="panel" id="p-non" role="tabpanel" aria-labelledby="t-non" hidden>
+          <div class="item">
+            <div class="item-thumb"><img src="coklat-aceh.jpg" alt="Cokelat Aceh"></div>
+            <div class="item-body"><div class="l"><h3>Cokelat Aceh</h3><span>Rp 28.000</span></div><p>Cokelat batangan lokal, susu, tanpa pemanis tambahan.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="teh-tarik-jahe.jpg" alt="Teh tarik jahe"></div>
+            <div class="item-body"><div class="l"><h3>Teh tarik jahe</h3><span>Rp 24.000</span></div><p>Teh hitam, jahe parut, susu kental manis.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=900&q=80" alt="Matcha susu"></div>
+            <div class="item-body"><div class="l"><h3>Matcha susu</h3><span>Rp 30.000</span></div><p>Matcha dan susu dingin dengan rasa lembut.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=900&q=80" alt="Soda jeruk kintamani"></div>
+            <div class="item-body"><div class="l"><h3>Soda jeruk kintamani</h3><span>Rp 26.000</span></div><p>Perasan jeruk segar dan air soda.</p></div>
+          </div>
+        </div>
+
+        <div class="panel" id="p-makan" role="tabpanel" aria-labelledby="t-makan" hidden>
+          <div class="item">
+            <div class="item-thumb"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80" alt="Roti bakar srikaya"></div>
+            <div class="item-body"><div class="l"><h3>Roti bakar srikaya</h3><span>Rp 22.000</span></div><p>Roti tebal, srikaya buatan dapur kami, mentega.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80" alt="Nasi telur balado"></div>
+            <div class="item-body"><div class="l"><h3>Nasi telur balado</h3><span>Rp 34.000</span></div><p>Telur, sambal balado, lalapan, dan nasi hangat.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="pisang-keju.jpg" alt="Pisang goreng keju"></div>
+            <div class="item-body"><div class="l"><h3>Pisang goreng keju</h3><span>Rp 25.000</span></div><p>Pisang kepok dan keju parut, disajikan hangat.</p></div>
+          </div>
+          <div class="item">
+            <div class="item-thumb"><img src="kue-lapis.jpg" alt="Kue lapis hari ini"></div>
+            <div class="item-body"><div class="l"><h3>Kue lapis</h3><span>Rp 18.000</span></div><p>Dibuat dari resep keluarga, stok terbatas.</p></div>
+          </div>
+        </div>
+
+        <p class="menu-note">Bisa ditambahkan susu oat sebesar Rp 5.000 per cangkir.</p>
+      </div>
+    </section>
+
+    <section class="story" id="cerita">
+      <div class="wrap grid">
+        <div>
+          <h2>Berawal dari garasi yang berukuran kecil</h2>
+          <p>Pada 2019 kami menyangrai 2 kilogram biji per minggu di garasi rumah, lalu menjualnya ke tetangga. Setahun kemudian garasi itu menjadi kedai, dan ukurannya terus bertambah karena pelanggan yang datang.</p>
+          <p>Kami membeli langsung dari kelompok tani dengan harga di atas pasar, lalu menulis nama kebunnya di tiap bungkus. Kalau Anda bertanya siapa yang menanam kopi ini, kami bisa menjawabnya.</p>
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <h3>Disangrai tiap Selasa</h3>
+            <p>Biji yang Anda minum paling lama berumur dua pekan sejak disangrai.</p>
+          </div>
+          <div class="fact">
+            <h3>Langsung dari petani</h3>
+            <p>berasal dari tujuh kelompok tani di Aceh, Bali, dan Flores.</p>
+          </div>
+          <div class="fact">
+            <h3>Gelas bawa sendiri</h3>
+            <p>Potongan Rp 3.000 untuk pelanggan yang membawa gelas atau tumbler.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" aria-label="Galeri café">
+      <div class="wrap">
+        <h2>Suasana yang bikin betah</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item large">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80" alt="Interior café dengan meja dan kursi">
+            <span class="label">Cozy corner</span>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80" alt="Barista membuat kopi di counter">
+            <span class="label">Barista</span>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80" alt="Pasta dan pastry di café">
+            <span class="label">Pastry</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="loc" id="lokasi">
+      <div class="wrap location-box">
+        <div class="grid">
+          <div>
+            <h2>Mampir kapan saja</h2>
+            <p>Kami selalu siap menyapa Anda dengan kopi hangat dan suasana yang santai.</p>
+
+            <table class="hours" id="hours">
+              <tr data-d="1"><td>Senin</td><td>07.00–21.00</td></tr>
+              <tr data-d="2"><td>Selasa</td><td>07.00–21.00</td></tr>
+              <tr data-d="3"><td>Rabu</td><td>07.00–21.00</td></tr>
+              <tr data-d="4"><td>Kamis</td><td>07.00–21.00</td></tr>
+              <tr data-d="5"><td>Jumat</td><td>07.00–21.00</td></tr>
+              <tr data-d="6"><td>Sabtu</td><td>08.00–22.00</td></tr>
+              <tr data-d="0"><td>Minggu</td><td>08.00–22.00</td></tr>
+            </table>
+
+            <p class="addr"><strong>Jl. Mawar No. 12, sudut Jl. Kenanga</strong><br>Parkir motor di depan, mobil di lahan sebelah. Kami juga menyediakan colokan di setiap meja.</p>
+          </div>
+
+          <div class="map" role="img" aria-label="Peta sederhana lokasi Sobat Kopi">
+            <div class="map-overlay"></div>
+            <div class="pin" align="center"><a href="https://www.google.com/maps/place/Sobat+Kopi" target="_blank" rel="noreferrer"><b>Tekan untuk mencari alamat</b></a><i></i></div>
+            <span class="map-note">Lokasi populer</span>
+          </div>
+        </div>
+
+        <div class="container">
+    <!-- Bagian Header -->
+    <div class="header">
+        <h1>SOBAT KOPI</h1>
+        <p style="color: white;">Reservasi Meja & Ruang Nongkrong Favoritmu</p>
     </div>
- 
-    <div class="panel" id="p-kopi" role="tabpanel" aria-labelledby="t-kopi">
-      <div class="item"><div class="l"><h3>Espresso</h3><span>Rp 20.000</span></div><p>Satu shot, dua kali lipat bila diminta.</p></div>
-      <div class="item"><div class="l"><h3>Americano</h3><span>Rp 24.000</span></div><p>Espresso dan air panas, bisa dingin.</p></div>
-      <div class="item"><div class="l"><h3>Kopi susu Sudut</h3><span>Rp 28.000</span></div><p>Espresso, susu segar, dan gula aren cair.<span class="tag">Paling sering dipesan</span></p></div>
-      <div class="item"><div class="l"><h3>Flat white</h3><span>Rp 30.000</span></div><p>Susu mikrofoam tipis, rasa kopi lebih kuat.</p></div>
-      <div class="item"><div class="l"><h3>V60 biji minggu ini</h3><span>Rp 32.000</span></div><p>Diseduh per gelas, sekitar 4 menit.</p></div>
-      <div class="item"><div class="l"><h3>Es kopi tubruk</h3><span>Rp 22.000</span></div><p>Seduh kasar dengan es batu dan sedikit gula.</p></div>
-    </div>
- 
-    <div class="panel" id="p-non" role="tabpanel" aria-labelledby="t-non" hidden>
-      <div class="item"><div class="l"><h3>Cokelat Aceh</h3><span>Rp 28.000</span></div><p>Cokelat batangan lokal, susu, tanpa pemanis tambahan.</p></div>
-      <div class="item"><div class="l"><h3>Teh tarik jahe</h3><span>Rp 24.000</span></div><p>Teh hitam, jahe parut, susu kental manis.</p></div>
-      <div class="item"><div class="l"><h3>Matcha susu</h3><span>Rp 30.000</span></div><p>Matcha Kalibening dan susu dingin.</p></div>
-      <div class="item"><div class="l"><h3>Soda jeruk kintamani</h3><span>Rp 26.000</span></div><p>Perasan jeruk segar dan air soda.</p></div>
-    </div>
- 
-    <div class="panel" id="p-makan" role="tabpanel" aria-labelledby="t-makan" hidden>
-      <div class="item"><div class="l"><h3>Roti bakar srikaya</h3><span>Rp 22.000</span></div><p>Roti tebal, srikaya buatan dapur kami, mentega.</p></div>
-      <div class="item"><div class="l"><h3>Nasi telur balado</h3><span>Rp 34.000</span></div><p>Telur, sambal balado, lalapan, dan nasi hangat.</p></div>
-      <div class="item"><div class="l"><h3>Pisang goreng keju</h3><span>Rp 25.000</span></div><p>Pisang kepok dan keju parut, disajikan hangat.</p></div>
-      <div class="item"><div class="l"><h3>Kue lapis hari ini</h3><span>Rp 18.000</span></div><p>Dibuat tetangga sebelah, jumlahnya terbatas.</p></div>
-    </div>
-    <p class="menu-note">Bisa ditambahkan susu oat dengan tambah harga Rp 5.000/cangkir</p>
-  </div>
-</section>
- 
-<section class="story" id="cerita">
-  <div class="wrap grid">
-    <div>
-      <h2>Berawal dari garasi yang berukuran kecil</h2>
-      <p>Pada 2019 kami menyangrai 2 kilogram biji per minggu di garasi rumah, lalu menjualnya ke tetangga. Setahun kemudian garasi itu menjadi kedai, dan ukurannya tidak berubah.</p>
-      <p>Kami membeli langsung dari kelompok tani dengan harga di atas pasar, dan menuliskan nama kebunnya di tiap bungkus. Kalau Anda bertanya siapa yang menanam kopi ini, kami bisa menjawabnya.</p>
-    </div>
-    <div class="facts">
-      <div class="fact"><h3>Disangrai tiap Selasa</h3><p>Biji yang Anda minum paling lama berumur dua pekan sejak disangrai.</p></div>
-      <div class="fact"><h3>Langsung dari petani</h3><p>berasal dari tujuh kelompok tani di Aceh, Bali, dan Flores.</p></div>
-      <div class="fact"><h3>Gelas bawa sendiri</h3><p>Potongan Rp 3.000 untuk pelanggan yang membawa gelas/tumbler.</p></div>
-    </div>
-  </div>
-</section>
- 
-<section class="loc" id="lokasi">
-  <div class="wrap grid">
-    <div>
-      <h2>Mampir kapan saja</h2>
-      <p>Kami selalu menemani Anda.</p>
-      <table class="hours" id="hours">
-        <tr data-d="1"><td>Senin</td><td>07.00–21.00</td></tr>
-        <tr data-d="2"><td>Selasa</td><td>07.00–21.00</td></tr>
-        <tr data-d="3"><td>Rabu</td><td>07.00–21.00</td></tr>
-        <tr data-d="4"><td>Kamis</td><td>07.00–21.00</td></tr>
-        <tr data-d="5"><td>Jumat</td><td>07.00–21.00</td></tr>
-        <tr data-d="6"><td>Sabtu</td><td>08.00–22.00</td></tr>
-        <tr data-d="0"><td>Minggu</td><td>08.00–22.00</td></tr>
-      </table>
-      <p class="addr"><b>Jl. Mawar No. 12, sudut Jl. Kenanga</b><br>Parkir motor di depan, mobil di lahan sebelah. Kami menyediakan colokan untuk anda di semua meja.</p>
-    </div>
-    <div class="map" role="img" aria-label="Peta sederhana: Sobat Kopi berada di persimpangan dua jalan">
-      <div class="park"></div>
-      <div class="pin"><b>Sobat Kopi</b><i></i></div>
-      <small>Ilustrasi, bukan peta asli</small>
-    </div>
-  </div>
-</section>
-</main>
- 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Sobat Kopi</span>
-    <span>@kopisudut · halo@kopisudut.example</span>
-  </div>
-</footer>
- 
+
+    <!-- Bagian Formulir -->
+    <form class="booking-form" id="formReservasi">
+        
+        <!-- Baris 1: Tanggal & Jam -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="tanggal">Tanggal Kedatangan *</label>
+                <input type="date" id="tanggal" required>
+            </div>
+            <div class="form-group">
+                <label for="jam">Jam Kedatangan *</label>
+                <select id="jam" required>
+                    <option value="">-- Pilih Jam --</option>
+                    <option value="10:00">10:00 WIB</option>
+                    <option value="13:00">13:00 WIB</option>
+                    <option value="16:00">16:00 WIB</option>
+                    <option value="19:00">19:00 WIB</option>
+                    <option value="20:30">20:30 WIB</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Baris 2: Jumlah Orang & Area -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="jumlah">Jumlah Tamu *</label>
+                <select id="jumlah" required>
+                    <option value="1-2 Orang">1 - 2 Orang</option>
+                    <option value="3-4 Orang">3 - 4 Orang</option>
+                    <option value="5-8 Orang">5 - 8 Orang</option>
+                    <option value="Lebih dari 8 Orang">8+ Orang (Grup Besar)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="area">Pilihan Area *</label>
+                <select id="area" required>
+                    <option value="Indoor (Non-Smoking / AC)">Indoor (AC / Non-Smoking)</option>
+                    <option value="Outdoor (Smoking Area)">Outdoor (Smoking Area)</option>
+                    <option value="VIP / Meeting Room">VIP / Meeting Room</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Baris 3: Data Pemesan -->
+        <div class="form-group">
+            <label for="nama">Nama Pemesan *</label>
+            <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" required>
+        </div>
+
+        <div class="form-group">
+            <label for="whatsapp">Nomor WhatsApp *</label>
+            <input type="tel" id="whatsapp" placeholder="Contoh: 081234567890" required>
+        </div>
+
+        <!-- Baris 4: Catatan Khusus -->
+        <div class="form-group">
+            <label for="catatan">Catatan Khusus (Opsional)</label>
+            <textarea id="catatan" rows="3" placeholder="Contoh: Butuh stopkontak dekat meja, kursi bayi, atau acara ulang tahun..."></textarea>
+        </div>
+
+        <!-- Informasi Kebijakan -->
+        <div class="policy-box">
+            <strong>Catatan Sobat Kopi:</strong> Meja akan ditahan maksimal <strong>20 menit</strong> dari jam reservasi. Jika terlambat tanpa konfirmasi, meja akan dialihkan ke pelanggan lain.
+        </div>
+
+        <!-- Tombol Kirim -->
+        <button type="submit" class="btn-submit">Konfirmasi Booking via WhatsApp</button>
+    </form>
+</div>
+
+<!-- Script untuk mengirim data form ke WhatsApp -->
 <script>
-(function(){
-  /* Menu mobile */
-  var burger=document.querySelector('.burger'),menu=document.querySelector('.menu');
-  burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
-  menu.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');}});
- 
-  /* Tab menu (bisa dengan panah kiri/kanan) */
-  var tabs=[].slice.call(document.querySelectorAll('.tab'));
-  function pick(t){
-    tabs.forEach(function(x){
-      var on=x===t;
-      x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;
-      document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+    // Mengatur tanggal minimal hari ini agar tidak bisa pilih tanggal kemarin
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('tanggal').setAttribute('min', today);
+
+    document.getElementById('formReservasi').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Ganti nomor di bawah ini dengan nomor WhatsApp admin Sobat Kopi (gunakan kode negara 62)
+        const nomorAdmin = "6281234567890"; 
+
+        // Mengambil nilai dari form
+        const tanggal = document.getElementById('tanggal').value;
+        const jam = document.getElementById('jam').value;
+        const jumlah = document.getElementById('jumlah').value;
+        const area = document.getElementById('area').value;
+        const nama = document.getElementById('nama').value;
+        const whatsapp = document.getElementById('whatsapp').value;
+        const catatan = document.getElementById('catatan').value || "-";
+
+        // Menyusun format pesan WhatsApp
+        const pesan = `Halo *Sobat Kopi*, saya ingin reservasi meja dengan detail berikut:%0A%0A` +
+                      `👤 *Nama:* ${nama}%0A` +
+                      `📱 *No. WA:* ${whatsapp}%0A` +
+                      `📅 *Tanggal:* ${tanggal}%0A` +
+                      `⏰ *Jam:* ${jam} WIB%0A` +
+                      `👥 *Jumlah Tamu:* ${jumlah}%0A` +
+                      `📍 *Area:* ${area}%0A` +
+                      `📝 *Catatan:* ${catatan}%0A%0A` +
+                      `Mohon konfirmasi ketersediaan mejanya ya. Terima kasih!`;
+
+        // Membuka WhatsApp Web / Aplikasi WA
+        const urlWA = `https://wa.me{nomorAdmin}?text=${pesan}`;
+        window.open(urlWA, '_blank');
     });
-  }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click',function(){pick(t);});
-    t.addEventListener('keydown',function(e){
-      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;
-      if(n===null)return;
-      n=(n+tabs.length)%tabs.length;pick(tabs[n]);tabs[n].focus();
-    });
-  });
- 
-  /* Status buka/tutup berdasarkan jam perangkat */
-  var H={0:[8,22],6:[8,22],1:[7,21],2:[7,21],3:[7,21],4:[7,21],5:[7,21]};
-  var now=new Date(),d=now.getDay(),h=now.getHours()+now.getMinutes()/60;
-  var s=document.getElementById('status'),t=document.getElementById('status-text');
-  var o=H[d];
-  function pad(n){return (n<10?'0':'')+n+'.00';}
-  if(h>=o[0]&&h<o[1]){s.classList.add('open');t.textContent='Buka tiap hari  ';}
-  else{
-    s.classList.add('closed');
-    var nd=h<o[0]?d:(d+1)%7;
-    t.textContent='Tutup, buka '+(nd===d?'hari ini':'besok')+' pukul '+pad(H[nd][0]);
-  }
-  var row=document.querySelector('#hours tr[data-d="'+d+'"]');
-  if(row)row.classList.add('today');
-})();
 </script>
+
+        <div class="cta-banner">
+          <div>
+            <h3>Siap menunggu pesanan Anda?</h3>
+            <p>Booking meja, takeaway, atau order untuk acara kecil bisa kami bantu.</p>
+          </div>
+          <a class="btn" href="https://wa.me/6281200000000" target="_blank" rel="noreferrer">Chat WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Sobat Kopi</span>
+      <span>@sobatkopi · halo@sobatkopi.example</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var burger = document.querySelector('.burger');
+      var menu = document.querySelector('.menu');
+
+      if (burger && menu) {
+        burger.addEventListener('click', function () {
+          var isOpen = menu.classList.toggle('open');
+          burger.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        menu.addEventListener('click', function (event) {
+          if (event.target.tagName === 'A') {
+            menu.classList.remove('open');
+            burger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+      function pick(tab) {
+        tabs.forEach(function (item) {
+          var isSelected = item === tab;
+          item.setAttribute('aria-selected', String(isSelected));
+          item.tabIndex = isSelected ? 0 : -1;
+          var panel = document.getElementById(item.getAttribute('aria-controls'));
+          if (panel) panel.hidden = !isSelected;
+        });
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener('click', function () { pick(tab); });
+        tab.addEventListener('keydown', function (event) {
+          var nextIndex = null;
+          if (event.key === 'ArrowRight') nextIndex = index + 1;
+          if (event.key === 'ArrowLeft') nextIndex = index - 1;
+          if (nextIndex === null) return;
+          nextIndex = (nextIndex + tabs.length) % tabs.length;
+          pick(tabs[nextIndex]);
+          tabs[nextIndex].focus();
+        });
+      });
+
+      var H = { 0: [8, 22], 6: [8, 22], 1: [7, 21], 2: [7, 21], 3: [7, 21], 4: [7, 21], 5: [7, 21] };
+      var now = new Date();
+      var d = now.getDay();
+      var h = now.getHours() + now.getMinutes() / 60;
+      var status = document.getElementById('status');
+      var statusText = document.getElementById('status-text');
+
+      if (status && statusText) {
+        var openingHours = H[d];
+        function pad(minutes) {
+          return (minutes < 10 ? '0' : '') + minutes + '.00';
+        }
+
+        if (h >= openingHours[0] && h < openingHours[1]) {
+          status.classList.add('open');
+          statusText.textContent = 'Buka hari ini';
+        } else {
+          status.classList.add('closed');
+          var nextDay = h < openingHours[0] ? d : (d + 1) % 7;
+          statusText.textContent = 'Tutup, buka ' + (nextDay === d ? 'hari ini' : 'besok') + ' pukul ' + pad(H[nextDay][0]);
+        }
+      }
+
+      var row = document.querySelector('#hours tr[data-d="' + d + '"]');
+      if (row) row.classList.add('today');
+    })();
+  </script>
 </body>
 </html>
  
